@@ -98,6 +98,7 @@ namespace NeoTrellis
 	}
 
 	//* shamelessely stolen from Adafruit (seesaw->neotrellis->basic example)
+	// link: https://github.com/adafruit/Adafruit_Seesaw/blob/master/examples/NeoTrellis/basic/basic.ino
 	// Input a value 0 to 255 to get a color value.
 	// The colors are a transition r - g - b - back to r.
 	uint32_t Wheel(byte WheelPos)

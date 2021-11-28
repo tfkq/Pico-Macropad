@@ -61,4 +61,4 @@ At first I wanted to create every shortcut inside the C++-program. However, I wn
 
 ## Credits and License
 
-*WIP*
+This project is under the MIT license. If you reuse any parts of this and publish it, please be so kind to mention me / this repo.
