@@ -5,7 +5,7 @@ A custom macropad built out of a Trellis Keypad, a display, rotary encoders and 
 
 ## Function
 
-*WIP*
+This macropad features 16 RGB-lit keys to program to your own pleasure! The display shows the name of each key, so you'll remember what each of these does. Also, thanks to the rotary encoders you are not limited to 16 keys, you can create aour own menu for every app you like. To switch between these menus, simply rotate the left encoder. The one on the right is used for media control, so you can adjust the volume and Play/Pause your music.
 
 
 ## Construction
