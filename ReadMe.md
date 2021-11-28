@@ -23,7 +23,7 @@ A custom macropad built out of a Trellis Keypad, a display, rotary encoders and 
 
 ### 3D-prints
 
-*WIP*
+I designed my own case and printed it with PLA ([Blue Pearl](https://www.dasfilament.de/filament-spulen/pla-1-75-mm/405/pla-filament-1-75-mm-blue-pearl?c=11)). I've put the Skynet logo on the front, because I felt the need to put something there and I have just watched Terminator 2. You can find the CAD and STL files in `doc/cad-files/`.
 
 
 
@@ -36,13 +36,25 @@ Secondly, as I had some trouble sending special keycodes (Volume UP and DOWN, Pl
 
 ### Source-Code for RPi Pico
 
-*WIP*
+The source-code is divided into different files, here is a short summary of them:
+
+| file                  | description                                                  |
+| --------------------- | ------------------------------------------------------------ |
+| **Pico-Marcopad.ino** | main file, brings everything together by telling the other modules what to do |
+| config.h              | saves the configuration of shrotcuts                         |
+| display.h             | controls the OLED-display                                    |
+| display_animation.h   | saves data for the startup-animation on the display          |
+| led_controller.h      | responsible for setting the brightness of all the leds       |
+| neotrellis.h          | controls and reads the Adafruit Neotrellis board             |
+| rotary_encoder.h      | controls and reads the two rotary encoders                   |
+| shortcut.h            | uses the the `Keyboard.h`-library to send the sortcuts to your PC |
+| *macropad.ahk*        | the AHK-script. Its at least responsible for the Volume and Play/Pause |
 
 
 
 ### AutoHotKey-Script
 
-- For anything that will be sended repetitively, I'm using the F13 to F14 keys. This goes for especially the sound settings, as I'm turning a rotary encoder and need a fast response
+At first I wanted to create every shortcut inside the C++-program. However, I wnated to build a config-creator to create the shortcuts with a GUI. This means, that the Pico will send a generic shortcut (`F24` + something), which will be ctched by an AHK-script. Finally, the script will perform all the tasks.
 
 
 
