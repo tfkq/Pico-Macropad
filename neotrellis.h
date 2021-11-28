@@ -24,7 +24,9 @@ namespace NeoTrellis
 	// NeoTrellis object
 	Adafruit_NeoTrellis trellis;
 
-	bool action_pending; // saves, if action needs to be taken
+	bool keysEngaged = false;
+
+	bool action_pending; // saves if action needs to be taken
 	int callback_num;	 // saves the last pressed key
 
 	int prev_app = -1;		   // saves the previous app
@@ -51,7 +53,7 @@ namespace NeoTrellis
 
 			if (LedController::resetTimer())
 			{
-				action_pending = true;
+				action_pending = keysEngaged;
 				callback_num = num;
 			}
 		}
@@ -88,6 +90,11 @@ namespace NeoTrellis
 		}
 
 		// Serial.println("[neotrellis::begin] Trellis board ready");
+	}
+
+	void engageKeys()
+	{
+		keysEngaged = true;
 	}
 
 	//* shamelessely stolen from Adafruit (seesaw->neotrellis->basic example)

@@ -18,61 +18,62 @@
 
 void setup()
 {
-
-  // get the config data ready
+  //* start all devices
   Config::begin();
-
-  // get the keyboard connection going
   ShortcutKeyboard::begin();
-
-  // set the trellis board up
   NeoTrellis::begin();
-
-  // start up the display
   delay(500); // wait a second for the display to wake up
   Display::begin();
-
-  // get the encoder spinning
   RotaryEncoderOne::begin();
   RotaryEncoderTwo::begin();
 
-  // fancy startup animation (notes 8-A)
-
+  //* fancy startup animation (notes 8-A)
   LedController::resetTimer();
   float luminanceTrellis = LedController::updateForNeoTrellis();
   float luminanceRotary = LedController::updateForRotaryEncoder();
 
   int step = 0;
   int steps_per_part = 1000;
+
   while (step < steps_per_part * 3)
   {
-    // first on stage: second rotary encoder
+    // save start time at loop
+    unsigned long t_start = micros();
+
+    // first on stage: second rotary encoder and the neotrellis
     if (step < steps_per_part)
     {
       RotaryEncoderTwo::startupAnim(step, steps_per_part, luminanceRotary);
+      NeoTrellis::startupAnim(step, steps_per_part, luminanceTrellis);
     }
-    // then the other one
+    // then the other rotary encoder and the display
     else if (step >= steps_per_part && step < steps_per_part * 2)
     {
       RotaryEncoderOne::startupAnim(step - steps_per_part, steps_per_part, luminanceRotary);
-    }
-    // and (for now last) the neotrellis board
-    else if (step >= steps_per_part * 2 && step < steps_per_part * 3)
-    {
-      NeoTrellis::startupAnim(step - steps_per_part * 2, steps_per_part, luminanceTrellis);
+      Display::startupAnim(step - steps_per_part, steps_per_part);
     }
 
-    // abort anim
+    // abort animation
     if (NeoTrellis::changed()) //TODO bug: prevent any action when you abort the startup anim
     {
+      delay(500);
       break;
     }
 
+    // go on as soon one millisecond has passed
+    while (true)
+    {
+      unsigned long t_now = micros();
+      if (t_now - t_start >= 1000)
+      {
+        break;
+      }
+    }
     step++;
-    delay(1);
   }
 
   LedController::resetTimer();
+  NeoTrellis::engageKeys();
 }
 
 void loop()
