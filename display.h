@@ -86,10 +86,11 @@ namespace Display
 	int prev_frame = -1;
 	void startupAnim(int step, int n_steps)
 	{
-		int steps_per_frame = n_steps / 13; // total number of steps / total number of frames
+		int steps_per_frame = n_steps / 13; 	// total number of steps / total number of frames
 		int frame = step / steps_per_frame;
+		frame = constrain(frame, 0, 12);		// make sure we stay in the valid range for the index
 
-		// only redraw, when we're in a new frame
+		// only redraw when we're in a new frame
 		if (frame != prev_frame)
 		{
 			display.clearDisplay();
