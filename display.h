@@ -86,9 +86,9 @@ namespace Display
 	int prev_frame = -1;
 	void startupAnim(int step, int n_steps)
 	{
-		int steps_per_frame = n_steps / 13; 	// total number of steps / total number of frames
+		int steps_per_frame = n_steps / 13; // total number of steps / total number of frames
 		int frame = step / steps_per_frame;
-		frame = constrain(frame, 0, 12);		// make sure we stay in the valid range for the index
+		frame = constrain(frame, 0, 12); // make sure we stay in the valid range for the index
 
 		// only redraw when we're in a new frame
 		if (frame != prev_frame)
@@ -164,7 +164,7 @@ namespace Display
 					char *name = app.buttons[i * 4 + j].name;
 					int x = 32 * j + 16;		   // calculate middle x coordinate
 					x = get_x_coordinate(name, x); // adjust to left side of the text
-					int y = 12 * i + 18;		   // calculate the upper-left corner y-coordinate
+					int y = 12 * i + 18;		   // calculate the upper-left corner / y-coordinate
 
 					display.setCursor(x, y);
 					display.print(name);
