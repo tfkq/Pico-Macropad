@@ -14,41 +14,32 @@
 // when defining colors you can either just use the index or
 // use #define to give each index a name
 const int color_table[][3] = {
-	{0, 0, 0},		 // 0 off
-	{255, 255, 255}, // 1 white
-	{255, 0, 0},	 // 2 red
-	{0, 255, 0},	 // 3 green
-	{0, 0, 255},	 // 4 blue
-	{255, 255, 0},	 // 5 yellow
-	{255, 127, 0},	 // 6 orange
-	{255, 0, 255},	 // 7 purple
-	{0, 127, 255},	 // 8 blue-cyan
-	{0, 255, 127},	 // 9 green-ish cyan
-	{127, 255, 0},	 // 10 green-yellow
+	{215, 215, 215},
+	{255, 0, 0},
+	{255, 64, 0},
+	{255, 127, 0},
+	{255, 191, 0},
+	{255, 255, 0},
+	{191, 255, 0},
+	{127, 255, 0},
+	{64, 255, 0},
+	{0, 255, 0},
+	{0, 255, 64},
+	{0, 255, 127},
+	{0, 255, 191},
+	{0, 255, 255},
+	{0, 191, 255},
+	{0, 127, 255},
+	{0, 64, 255},
+	{0, 0, 255},
+	{64, 0, 255},
+	{127, 0, 255},
+	{191, 0, 255},
+	{255, 0, 255},
+	{255, 0, 191},
+	{255, 0, 127},
+	{255, 0, 64},
 };
-
-#define C_OFF 0
-#define C_WHITE 1
-#define C_RED 2
-#define C_GREEN 3
-#define C_BLUE 4
-#define C_YELLOW 5
-#define C_ORANGE 6
-#define C_Purple 7
-#define C_GreenYellow 10
-
-#define C_Media 5	  // multimedia
-#define C_Destruct 2  // everything with danger
-#define C_Destruct2 6 // everything with less danger
-#define C_Open 9	  // open files 'n stuff
-#define C_New 3		  // creating new things
-#define C_Nav 4		  // navigating
-#define C_Nav2 8	  // navigating, but different
-#define C_Search 7	  // searching
-
-#define C_F360_Create 3
-#define C_F360_Sketch 8
-#define C_F360_Modify 5
 
 namespace Config
 {

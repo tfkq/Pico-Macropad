@@ -17,7 +17,7 @@
 #define STANDBY_TIME 25000
 #define DISABLING_TIME 500
 // leds settings (everything in %)
-#define FULL_POWER 30	   // the brightest the led will shine in awake mode
+#define FULL_POWER 25	   // the brightest the led will shine in awake mode
 #define STANDBY_POWER 7	   // the percentage of how much the led should shine when in standby
 #define FULL_POWER_ROT 100 // same, but only for the rotary encoders
 #define STANDBY_POWER_ROT 40
