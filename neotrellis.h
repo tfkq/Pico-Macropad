@@ -101,23 +101,37 @@ namespace NeoTrellis
 	// link: https://github.com/adafruit/Adafruit_Seesaw/blob/master/examples/NeoTrellis/basic/basic.ino
 	// Input a value 0 to 255 to get a color value.
 	// The colors are a transition r - g - b - back to r.
-	uint32_t Wheel(byte WheelPos)
+	uint32_t Wheel(byte WheelPos, float luminance)
 	{
+		float r, g, b;
+
 		if (WheelPos < 85)
 		{
-			return trellis.pixels.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+			r = WheelPos * 3;
+			g = 255 - WheelPos *3;
+			b = 0;
 		}
 		else if (WheelPos < 170)
 		{
 			WheelPos -= 85;
-			return trellis.pixels.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+			r = 255- WheelPos * 3;
+			g = 0;
+			b = WheelPos *3;
 		}
 		else
 		{
 			WheelPos -= 170;
-			return trellis.pixels.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+			r = 0;
+			g = WheelPos * 3;
+			b = 255-WheelPos *3;
 		}
-		return 0;
+
+		r = r * luminance/100;
+		g = g * luminance/100;
+		b = b * luminance/100;
+
+		return trellis.pixels.Color(r,g,b);
+		
 	}
 
 	/** @brief plays a fast startup animation
@@ -131,7 +145,7 @@ namespace NeoTrellis
 		if (step < n_steps / 2)
 		{
 			int i = map(step, 0, n_steps / 2, 0, trellis.pixels.numPixels());
-			trellis.pixels.setPixelColor(i, Wheel(map(i, 0, trellis.pixels.numPixels(), 0, 255)));
+			trellis.pixels.setPixelColor(i, Wheel(map(i, 0, trellis.pixels.numPixels(), 0, 255), luminance));
 			trellis.pixels.show();
 		}
 		else
@@ -209,9 +223,9 @@ namespace NeoTrellis
 				rgb[2] *= luminance / 100;
 
 				// round to make 'integers'
-				rgb[0] = round(rgb[0]);
-				rgb[1] = round(rgb[1]);
-				rgb[2] = round(rgb[2]);
+				rgb[0] = rgb[0];
+				rgb[1] = rgb[1];
+				rgb[2] = rgb[2];
 
 				int color = trellis.pixels.Color(rgb[0], rgb[1], rgb[2]); // save the color in packed 32-bit format
 

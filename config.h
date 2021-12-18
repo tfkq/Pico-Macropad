@@ -79,146 +79,170 @@ namespace Config
 		//* CREATE APPS AND SHORTCUTS HERE
 		//--SOF_ShortcutDefintion--
 
-		// main menu
-		struct App main = {"MAIN",
-						   {{"Mic", "$F21", C_Media}, {"Lock", "$Wl", C_Destruct2}, {"StBy", "$F15", C_Destruct}, {"Off", "$F16", C_Destruct}, {"Back", "$F19", C_Media}, {"Forw", "$F20", C_Media}, {"Min", "$F13", C_Nav}, {"Max", "$F14", C_Nav}, {"<-", "$A$T", C_Nav}, {"->", "$S$A$T", C_Nav}, emptyButton, emptyButton, {"Win1", "$W1", C_Nav}, {"Win2", "$W2", C_Nav}, {"Win3", "$W3", C_Nav}, {"Win4", "$W4", C_Nav}}};
+		// MAIN
+		struct App MAIN = {"MAIN",
+						   {
+							   {"MIC", "$F240#0.", 5},
+							   {"LOCK", "$F240#1.", 3},
+							   {"StBy", "$F240#2.", 2},
+							   {"Off", "$F240#3.", 1},
+							   {"Min", "$F240#4.", 14},
+							   {"Max", "$F240#5.", 14},
+							   {"Prev", "$F240#6.", 4},
+							   {"Next", "$F240#7.", 4},
+							   {"<-", "$F240#8.", 0},
+							   {"->", "$F240#9.", 0},
+							   {"", "$F240#10.", 0},
+							   {"", "$F240#11.", 0},
+							   {"Win1", "$F240#12.", 17},
+							   {"Win2", "$F240#13.", 17},
+							   {"Win3", "$F240#14.", 17},
+							   {"Win4", "$F240#15.", 17},
 
-		// Explorer
-		struct App explorer = {"Explorer",
-							   {
-								   {"cmd", "$Ct", 0},
-								   {"cmd>", "$C$Sp", 0},
-								   {"SymF", "$C$S.", 0},
-								   {"Find", "§Cf", 0},
-								   {"SVup", "$C$S$A.", 0},
-								   {"Repl", "$S$A$F12", 0},
-								   {"oFil", "$Co", 0},
-								   {"oFol", "$Cko", 0},
-								   {"SVen", "$Cb", 0},
-								   {"Run", "$F5", 0},
-								   {"nFil", "$Cn", 0},
-								   {"nFol", "$Cnf", 0},
-								   {"SVdn", "$C$S$A,", 0},
-								   {"Term", "$C$Sc", 0},
-								   {"<T<", "$C$S$1", 0},
-								   {">T>", "$C$S$0", 0},
-							   }};
+						   }};
+
+		// QuickStart
+		struct App QuickStart = {"QuickStart",
+								 {
+									 {"AbiV", "$F241#0.", 19},
+									 {"HA_V", "$F241#1.", 19},
+									 {"NB_V", "$F241#2.", 19},
+									 {"Obdn", "$F241#3.", 19},
+									 {"Typo", "$F241#4.", 12},
+									 {"Notn", "$F241#5.", 12},
+									 {"Word", "$F241#6.", 17},
+									 {"Excl", "$F241#7.", 9},
+									 {"", "$F241#8.", 0},
+									 {"", "$F241#9.", 0},
+									 {"", "$F241#10.", 0},
+									 {"", "$F241#11.", 0},
+									 {"Sblm", "$F241#12.", 3},
+									 {"VSCo", "$F241#13.", 15},
+									 {"Ardu", "$F241#14.", 12},
+									 {"ViSt", "$F241#15.", 20},
+
+								 }};
 
 		// Firefox
-		struct App firefox = {"Firefox",
+		struct App Firefox = {"Firefox",
 							  {
-								  {"NTab", "$Ct", C_New},
-								  {"NWin", "$Cn", C_New},
-								  {"CTab", "$Cw", C_Destruct2},
-								  {"CWin", "$C$Sw", C_Destruct},
-								  {"Srch", "$Ck", C_Search},
-								  {"Wiki", "$Cl$C@wiki$E", C_Search},
-								  {"LEO", "$Cl$C@leo$E", C_Search},
-								  {"SrPg", "$Cf", C_Search},
-								  {"Mute", "$Cm", C_Media},
-								  {"Z0", "$C0", C_Nav},
-								  {"Z+", "$C+", C_Nav},
-								  {"Z-", "$C-", C_Nav},
-								  {"Home", "$A$1", C_Nav},
-								  {"Refr", "$F5", C_Nav},
-								  {"<T<", "$C$S$T", C_Nav},
-								  {">T>", "$C$T", C_Nav},
+								  {"NTab", "$F242#0.", 8},
+								  {"NWin", "$F242#1.", 8},
+								  {"CTab", "$F242#2.", 3},
+								  {"CWin", "$F242#3.", 1},
+								  {"Srch", "$F242#4.", 23},
+								  {"Wiki", "$F242#5.", 23},
+								  {"Leo", "$F242#6.", 23},
+								  {"SrPg", "$F242#7.", 23},
+								  {"Mute", "$F242#8.", 4},
+								  {"Z0", "$F242#9.", 14},
+								  {"Z-", "$F242#10.", 14},
+								  {"Z+", "$F242#11.", 14},
+								  {"Home", "$F242#12.", 16},
+								  {"Refr", "$F242#13.", 16},
+								  {"<T<", "$F242#14.", 17},
+								  {">T>", "$F242#15.", 17},
+
 							  }};
 
-		// Visual Studio Code
-		struct App vs_code = {"VS-Code",
+		// VS_Code
+		struct App VS_Code = {"VS-Code",
 							  {
-								  {"cmd", "$Cp", C_Nav},
-								  {"cmd>", "$C$Sp", C_Nav},
-								  {"SymF", "$C$S.", C_Search},
-								  {"Find", "$Cf", C_Search},
-								  {"SVup", "$C$S$A.", C_Nav2},
-								  {"Repl", "$S$A$F12", C_Search},
-								  {"oFil", "$Co", C_Open},
-								  {"oFol", "$Cko", C_Open},
-								  {"SVen", "$Cb", C_Nav2},
-								  {"Run", "$F5", C_GreenYellow},
-								  {"nFil", "$Cn", C_New},
-								  {"nFol", "$Cnf", C_New},
-								  {"SVdn", "$C$S$A,", C_Nav2},
-								  {"Term", "$C$Sc", C_Open},
-								  {"<T<", "$C$S$1", C_Nav},
-								  {">T>", "$C$S$0", C_Nav},
+								  {"", "$F243#0.", 0},
+								  {"", "$F243#1.", 0},
+								  {"", "$F243#2.", 0},
+								  {"", "$F243#3.", 0},
+								  {"", "$F243#4.", 0},
+								  {"", "$F243#5.", 0},
+								  {"", "$F243#6.", 0},
+								  {"", "$F243#7.", 0},
+								  {"", "$F243#8.", 0},
+								  {"", "$F243#9.", 0},
+								  {"", "$F243#10.", 0},
+								  {"", "$F243#11.", 0},
+								  {"", "$F243#12.", 0},
+								  {"", "$F243#13.", 0},
+								  {"", "$F243#14.", 0},
+								  {"", "$F243#15.", 0},
+
 							  }};
 
-		// Autodesk Fusion 360
-		struct App fusion360 = {"Fusion 360",
-								{
-									{"Sket", "k", C_F360_Create},
-									{"Extr", "e", C_F360_Create},
-									{"Dreh", "d", C_F360_Create},
-									{"Erhe", "$Ce", C_F360_Create},
-									{"Line", "l", C_F360_Sketch},
-									{"Circ", "c", C_F360_Sketch},
-									{"Rect", "r", C_F360_Sketch},
-									{"Bow", "b", C_F360_Sketch},
-									{"Abru", "f", C_F360_Modify},
-									{"Fase", "$Sf", C_F360_Modify},
-									{"Move", "m", C_F360_Modify},
-									{"Para", "$Cp", C_Purple},
-									{"Mess", "i", C_Purple},
-									{"Plan", "u", C_ORANGE},
-									{"Open", "$Co", C_Open},
-									{"Save", "$Cs", C_Open},
-								}};
-
-		// Unity
-		struct App unity = {"Unity",
-							{
-								{"-", "$Ct", 0},
-								{"-", "$C$Sp", 0},
-								{"-", "$C$S.", 0},
-								{"-", "§Cf", 0},
-								{"-", "$C$S$A.", 0},
-								{"-", "$S$A$F12", 0},
-								{"-", "$Co", 0},
-								{"-", "$Cko", 0},
-								{"-", "$Cb", 0},
-								{"-", "$F5", 0},
-								{"-", "$Cn", 0},
-								{"-", "$Cnf", 0},
-								{"-", "$C$S$A,", 0},
-								{"-", "$C$Sc", 0},
-								{"-", "$C$S$1", 0},
-								{"-", "$C$S$0", 0},
-							}};
-
-		// Aseprite
-		struct App aseprite = {"Aseprite",
+		// Obsidian
+		struct App Obsidian = {"Obsidian",
 							   {
-								   {"-", "$Ct", 0},
-								   {"-", "$C$Sp", 0},
-								   {"-", "$C$S.", 0},
-								   {"-", "§Cf", 0},
-								   {"-", "$C$S$A.", 0},
-								   {"-", "$S$A$F12", 0},
-								   {"-", "$Co", 0},
-								   {"-", "$Cko", 0},
-								   {"-", "$Cb", 0},
-								   {"-", "$F5", 0},
-								   {"-", "$Cn", 0},
-								   {"-", "$Cnf", 0},
-								   {"-", "$C$S$A,", 0},
-								   {"-", "$C$Sc", 0},
-								   {"-", "$C$S$1", 0},
-								   {"-", "$C$S$0", 0},
+								   {"Expl", "$F244#0.", 6},
+								   {"OFil", "$F244#1.", 8},
+								   {"Ostd", "$F244#2.", 11},
+								   {"Tags", "$F244#3.", 14},
+								   {"Srch", "$F244#4.", 6},
+								   {"Mode", "$F244#5.", 17},
+								   {"", "$F244#6.", 0},
+								   {"Outl", "$F244#7.", 14},
+								   {"Grph", "$F244#8.", 6},
+								   {"", "$F244#9.", 0},
+								   {"", "$F244#10.", 0},
+								   {"Todo", "$F244#11.", 14},
+								   {"PDF", "$F244#12.", 6},
+								   {"Corr", "$F244#13.", 4},
+								   {"Corr", "$F244#14.", 5},
+								   {"Tabl", "$F244#15.", 14},
+
 							   }};
 
-		//* ASSIGN APPS TO POSITIONS IN THE APP LIST
-		apps[0] = main;
-		apps[1] = explorer;
-		apps[2] = firefox;
-		apps[3] = vs_code;
-		apps[4] = fusion360;
-		apps[5] = unity;
-		apps[6] = aseprite;
+		// Fusion360
+		struct App Fusion360 = {"Fusion 360",
+								{
+									{"", "$F245#0.", 0},
+									{"", "$F245#1.", 0},
+									{"", "$F245#2.", 0},
+									{"", "$F245#3.", 0},
+									{"", "$F245#4.", 0},
+									{"", "$F245#5.", 0},
+									{"", "$F245#6.", 0},
+									{"", "$F245#7.", 0},
+									{"", "$F245#8.", 0},
+									{"", "$F245#9.", 0},
+									{"", "$F245#10.", 0},
+									{"", "$F245#11.", 0},
+									{"", "$F245#12.", 0},
+									{"", "$F245#13.", 0},
+									{"", "$F245#14.", 0},
+									{"", "$F245#15.", 0},
+
+								}};
+
+		// Aseprite
+		struct App Aseprite = {"Aseprite",
+							   {
+								   {"", "$F246#0.", 0},
+								   {"", "$F246#1.", 0},
+								   {"", "$F246#2.", 0},
+								   {"", "$F246#3.", 0},
+								   {"", "$F246#4.", 0},
+								   {"", "$F246#5.", 0},
+								   {"", "$F246#6.", 0},
+								   {"", "$F246#7.", 0},
+								   {"", "$F246#8.", 0},
+								   {"", "$F246#9.", 0},
+								   {"", "$F246#10.", 0},
+								   {"", "$F246#11.", 0},
+								   {"", "$F246#12.", 0},
+								   {"", "$F246#13.", 0},
+								   {"", "$F246#14.", 0},
+								   {"", "$F246#15.", 0},
+
+							   }};
+
+		apps[0] = MAIN;
+		apps[1] = QuickStart;
+		apps[2] = Firefox;
+		apps[3] = VS_Code;
+		apps[4] = Obsidian;
+		apps[5] = Fusion360;
+		apps[6] = Aseprite;
 
 		//--EOF_ShortcutDefintion--
+		NUMBER_OF_APPS = 7; //NOTE: update me too
 
 		//debug
 		// Serial.println("[Config::begin] ### ### ### ### ### ### ### ###");

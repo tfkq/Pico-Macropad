@@ -14,7 +14,7 @@
 #include "rotary_encoder.h"
 
 //* DEFINING CONSTANTS
-#define NUMBER_OF_APPS 7
+int NUMBER_OF_APPS  = 7;
 
 void setup()
 {
