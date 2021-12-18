@@ -126,12 +126,13 @@ namespace RotaryEncoderOne
     // send volume command
     if (counter_volume == STEPS_PER_VOLUME)
     {
-      ShortcutKeyboard::press(KEY_F24);
+      // volume up
+      ShortcutKeyboard::press(KEY_F22);
       counter_volume = 0;
     }
     else if (counter_volume == -STEPS_PER_VOLUME)
     {
-      ShortcutKeyboard::press(KEY_F23);
+      ShortcutKeyboard::press(KEY_F21);
       counter_volume = 0;
     }
 
@@ -145,7 +146,7 @@ namespace RotaryEncoderOne
       {
         // Serial.println("[ROT1::update] sw, sending -pause-");
         LedController::resetTimer();
-        ShortcutKeyboard::press(KEY_F22);
+        ShortcutKeyboard::press(KEY_F20);
       }
     }
   }
