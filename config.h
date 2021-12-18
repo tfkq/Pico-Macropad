@@ -66,7 +66,7 @@ namespace Config
 
 	//* variables
 
-	App apps[16];
+	App apps[24];
 
 	//* functions
 	/** @brief set up all the config data. Apps and their shortcuts are hardcoded in here
@@ -242,7 +242,6 @@ namespace Config
 		apps[6] = Aseprite;
 
 		//--EOF_ShortcutDefintion--
-		NUMBER_OF_APPS = 7; //NOTE: update me too
 
 		//debug
 		// Serial.println("[Config::begin] ### ### ### ### ### ### ### ###");

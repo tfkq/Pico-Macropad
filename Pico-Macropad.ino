@@ -14,7 +14,7 @@
 #include "rotary_encoder.h"
 
 //* DEFINING CONSTANTS
-int NUMBER_OF_APPS  = 7;
+int NUMBER_OF_APPS = 7;
 
 void setup()
 {
@@ -74,6 +74,18 @@ void setup()
 
   LedController::resetTimer();
   NeoTrellis::engageKeys();
+
+  //* quickly find the number of Apps
+  NUMBER_OF_APPS = 0;
+  char empty_name[21];
+  for (int i = 0; i < 24; i++)
+  {
+    if (strcmp(Config::apps[i].name, empty_name) == 0)
+    {
+      break;
+    }
+    NUMBER_OF_APPS++;
+  }
 }
 
 void loop()
