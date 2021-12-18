@@ -14,7 +14,7 @@
 // when defining colors you can either just use the index or
 // use #define to give each index a name
 const int color_table[][3] = {
-	{215, 215, 215},
+	{0, 0, 0},
 	{255, 0, 0},
 	{255, 64, 0},
 	{255, 127, 0},

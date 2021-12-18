@@ -7,7 +7,6 @@ A custom macropad built out of a Trellis Keypad, a display, rotary encoders and 
 
 This macropad features 16 RGB-lit keys to program to your own pleasure! The display shows the name of each key, so you'll remember what each of these does. Also, thanks to the rotary encoders you are not limited to 16 keys, you can create aour own menu for every app you like. To switch between these menus, simply rotate the left encoder. The one on the right is used for media control, so you can adjust the volume and Play/Pause your music.
 
-
 ## Construction
 
 ### Materials and parts
@@ -20,10 +19,19 @@ This macropad features 16 RGB-lit keys to program to your own pleasure! The disp
 | Adafruit NeoTrellis Driver PCB                           | 12.90 € | [Berrybase](https://www.berrybase.de/neu/adafruit-neotrellis-rgb-treiber-pcb-f-252-r-4x4-keypad?c=2434) |
 | Adafruit Silikon Elastomer 4x4 Button Keypad             | 5.10 €  | [Berrybase](https://www.berrybase.de/sensoren-module/eingabe/adafruit-silikon-elastomer-4x4-button-keypad-f-252-r-3mm-leds) |
 | Monochromes 1.3" 128x64 OLED Display - STEMMA QT / Qwiic | 20.55 € | [Berrybase](https://www.berrybase.de/sensoren-module/displays/oled-displays/monochromes-1.3-128x64-oled-display-stemma-qt/qwiic) |
+| Screws, 3mm in diameter, 16mm in length (4x)             | ?       | had them laying around                                       |
 
 ### 3D-prints
 
 I designed my own case and printed it with PLA ([Blue Pearl](https://www.dasfilament.de/filament-spulen/pla-1-75-mm/405/pla-filament-1-75-mm-blue-pearl?c=11)). I've put the Skynet logo on the front, because I felt the need to put something there and I have just watched Terminator 2. You can find the CAD and STL files in `doc/cad-files/`.
+
+### Assembly
+
+1. Wiring:
+	There are some images of the wiring in the `doc` folder. However, there are some errors in the schematics that I haven't fixed yet.
+2. Putting the parts together:
+	I used four screws with a diameter of 3mm and a length of 16mm
+	I taped some foam on top of the legs for the trellis board, so it can't wiggle too much
 
 
 
@@ -40,7 +48,7 @@ The source-code is divided into different files, here is a short summary of them
 
 | file                  | description                                                  |
 | --------------------- | ------------------------------------------------------------ |
-| **Pico-Marcopad.ino** | main file, brings everything together by telling the other modules what to do |
+| **Pico-Macropad.ino** | main file, brings everything together by telling the other modules what to do |
 | config.h              | saves the configuration of shrotcuts                         |
 | display.h             | controls the OLED-display                                    |
 | display_animation.h   | saves data for the startup-animation on the display          |
@@ -54,7 +62,7 @@ The source-code is divided into different files, here is a short summary of them
 
 ### AutoHotKey-Script
 
-At first I wanted to create every shortcut inside the C++-program. However, I wnated to build a config-creator to create the shortcuts with a GUI. This means, that the Pico will send a generic shortcut (`F24` + something), which will be ctched by an AHK-script. Finally, the script will perform all the tasks.
+At first I wanted to create every shortcut inside the C++-program. However, I wanted to build a [config-creator](https://github.com/zauberwild/Pico-Macropad-Config-Creator) to create the shortcuts with a GUI. This means, that the Pico will send a generic shortcut (`F24` + something), which will be ctched by an AHK-script. Finally, the script will perform all the tasks.
 
 
 
