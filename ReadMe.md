@@ -7,7 +7,7 @@ A custom macropad built out of a Trellis Keypad, a display, rotary encoders and 
 
 This macropad features 16 RGB-lit keys to program to your own pleasure! The display shows the name of each key, so you'll remember what each of these does. Also, thanks to the rotary encoders you are not limited to 16 keys, you can create aour own menu for every app you like. To switch between these menus, simply rotate the left encoder. The one on the right is used for media control, so you can adjust the volume and Play/Pause your music.
 
-How to create a configuration: 
+How to create a configuration: [Config-Creation](#Config-Creation)
 
 ## Construction
 
@@ -66,9 +66,9 @@ The source-code is divided into different files, here is a short summary of them
 
 At first I wanted to create every shortcut inside the C++-program. However, I wanted to build a [Config-Creator](https://github.com/zauberwild/Pico-Macropad-Config-Creator) to create the shortcuts with a GUI. This means, that the Pico will send a generic shortcut (`F24` + something), which will be ctched by an AHK-script. Finally, the script will perform all the tasks.
 
-#### Config Creation
+### Config Creation
 
-To create a Configuration, you need to head over to my [Config-Creator](https://github.com/zauberwild/Pico-Macropad-Config-Creator). Make sure to save the config as a JSON to be able to reuse and change it later. The code and the script can be regenerated with the JSON-file.
+To create a Configuration, you need to head over to my [Config-Creator](https://github.com/zauberwild/Pico-Macropad-Config-Creator).
 
 
 ## Credits and License
