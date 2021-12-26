@@ -138,7 +138,7 @@ namespace NeoTrellis
    * @param step current step
    * @param n_steps number of steps this animation will perform
    * @param luminance luminance of the led (%)
-   * documentation: notes 8-C
+   * it resembles the small animation from the examples from Adafruit, but slightly modified to fit into the sketch
    */
 	void startupAnim(int step, int n_steps, int luminance)
 	{
@@ -215,7 +215,7 @@ namespace NeoTrellis
 				}
 
 				// there used to be some brightness balancing here, however it didn't worked.
-				// maybe i'll revisit it in the future, maybe not
+				//TODO: maybe i'll revisit it in the future, maybe not
 
 				// apply the luminance value
 				rgb[0] *= luminance / 100;

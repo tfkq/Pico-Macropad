@@ -74,7 +74,7 @@ namespace Config
 	void begin()
 	{
 
-		struct Button emptyButton = {"-", "", 0};
+		// struct Button emptyButton = {"-", "", 0};
 
 		//* CREATE APPS AND SHORTCUTS HERE
 		//--SOF_ShortcutDefintion--

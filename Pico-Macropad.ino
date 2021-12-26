@@ -1,4 +1,4 @@
-/** ARDUINO-MACROPAD
+/** PICO-MACROPAD
 
 
    created by zauberwild in 16.08.2021
@@ -18,6 +18,12 @@ int NUMBER_OF_APPS = 7;
 
 void setup()
 {
+  // for your filthy debugging pleasures
+  // Serial.begin(9600);
+  // while (!Serial)
+  // {
+  // }
+
   //* start all devices
   Config::begin();
   ShortcutKeyboard::begin();

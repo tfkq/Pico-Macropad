@@ -41,7 +41,7 @@ namespace RotaryEncoderOne
   // (pulse_OFF because the switch input is inverted; false == pressed)
   //NOTE: update on that one: for some reason the switch isn't inverted (be it the bounce2 library or sth else)
   //NOTE: so the reading will be inverted to accommodate "false equals pressed" statement.
-  //TODO: should change that to boe logical at some point
+  //TODO: should change that to be logical at some point
 
   const volatile int STEPS_PER_VOLUME = 1; // how many steps you need to turn the knob for one command
 
