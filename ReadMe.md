@@ -2,7 +2,7 @@
 
 <img src="pico-macropad.jpg" alt="pico-macropad" style="zoom: 50%;" />
 
-A custom macropad built out of a Trellis Keypad, a display, rotary encoders and an Arduino
+A custom macropad built out of a Trellis Keypad, a display, rotary encoders and an Raspberry Pi Pico
 
 ## Function
 
