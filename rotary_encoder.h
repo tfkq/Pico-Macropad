@@ -300,14 +300,16 @@ namespace RotaryEncoderTwo
     if (bounce_a.changed() && bounce_a.read() == LOW)
     {
 
+      // update the timer to prevent / get out of sleepy mode
       last_change = millis();
       LedController::resetTimer();
 
-      if (bounce_b.read() == HIGH)
+      // change the app, unless we are in sleepy mode
+      if (bounce_b.read() == HIGH && LedController::getRotaryState())
       {
         app++;
       }
-      else
+      else if (bounce_b.read() == LOW && LedController::getRotaryState())
       {
         app--;
       }
