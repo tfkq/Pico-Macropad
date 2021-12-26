@@ -15,7 +15,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-#include "display_animation.h"
+#include "flavortext.h"
 
 //* DEFINING CONSTANTS
 #define SCREEN_WIDTH 128	// OLED display width, in pixels
@@ -79,37 +79,35 @@ namespace Display
 		display.setTextSize(1);
 	}
 
-	/** @brief a lil startup animation
-	 * @param step the current step we're in
-	 * @param n_steps the total amount of steps this animation will be doing
+	/** @brief a lil startup animation. it will print out random status lines like a linux booting up
 	 */
-	int prev_frame = -1;
-	void startupAnim(int step, int n_steps)
+	char buffer[8][24];
+	void startupAnim()
 	{
-		int steps_per_frame = n_steps / 13; // total number of steps / total number of frames
-		int frame = step / steps_per_frame;
-		frame = constrain(frame, 0, 12); // make sure we stay in the valid range for the index
+		// clear display and reset cursor
+		display.clearDisplay();
+		display.setCursor(0, 0);
 
-		// only redraw when we're in a new frame
-		if (frame != prev_frame)
+		// pushing every element of the buffer to the left (index downwards, on the display upwards)
+		for (int i = 0; i < 7; i++)
 		{
-			display.clearDisplay();
-			for (int i = 0; i < 512; i++)
+			for (int j = 0; j < 24; j++)
 			{
-				if (AnimationCoords::x[frame][i] == -1)
-				{
-					break;
-				}
-				else
-				{
-					int x = AnimationCoords::x[frame][i];
-					int y = AnimationCoords::y[frame][i];
-					display.drawPixel(x, y, 1);
-				}
+				buffer[i][j] = buffer[i + 1][j];
 			}
-			display.display();
 		}
-		prev_frame = frame;
+
+		// generate new line in last index of buffer
+		bool constructive = random(100) != 0;		// make deconstructive line sometimes
+		getFullLine(&buffer[7][0], constructive);
+
+		// print the text
+		for (int i = 0; i < 8; i++)
+		{
+			display.println(buffer[i]);
+		}
+
+		display.display();
 	}
 
 	/** @brief update the display text if necessary

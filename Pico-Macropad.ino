@@ -27,51 +27,32 @@ void setup()
   RotaryEncoderOne::begin();
   RotaryEncoderTwo::begin();
 
-  //* fancy startup animation (notes 8-A)
+  //* fancy startup animation
+  // originally, there were no delay allowed during the startup animation (i wanted to be able to interrupt it).
+  // Later I simplified it (and did use delay), but there are still some parts left, which is why there so many steps
   LedController::resetTimer();
   float luminanceTrellis = LedController::updateForNeoTrellis();
-  float luminanceRotary = LedController::updateForRotaryEncoder();
 
-  int step = 0;
   int steps_per_part = 1000;
 
-  while (step < steps_per_part * 3)
+  // let the trellis board do a little blinky-blinky (stolen from the neotrellis examples by Adafruit)
+  for (int i = 0; i < steps_per_part; i++)
   {
-    // save start time at loop
-    unsigned long t_start = micros();
+    NeoTrellis::startupAnim(i, steps_per_part, luminanceTrellis);
 
-    // first on stage: second rotary encoder and the neotrellis
-    if (step < steps_per_part)
-    {
-      RotaryEncoderTwo::startupAnim(step, steps_per_part, luminanceRotary);
-      NeoTrellis::startupAnim(step, steps_per_part, luminanceTrellis);
-    }
-    // then the other rotary encoder and the display
-    else if (step >= steps_per_part && step < steps_per_part * 2)
-    {
-      RotaryEncoderOne::startupAnim(step - steps_per_part, steps_per_part, luminanceRotary);
-      Display::startupAnim(step - steps_per_part, steps_per_part);
-    }
-
-    // abort animation
-    if (NeoTrellis::changed()) //TODO bug: prevent any action when you abort the startup anim
-    {
-      delay(500);
-      break;
-    }
-
-    // go on as soon one millisecond has passed
-    while (true)
-    {
-      unsigned long t_now = micros();
-      if (t_now - t_start >= 1000)
-      {
-        break;
-      }
-    }
-    step++;
+    delay(1500 / steps_per_part);
   }
 
+  // show random status lines like a linux booting up
+  steps_per_part = 24;
+  for (int i = 0; i < steps_per_part; i++)
+  {
+    Display::startupAnim();
+    int rand = random(300);
+    delay(rand);
+  }
+
+  // now reset timer and activate keys to prepare for battle
   LedController::resetTimer();
   NeoTrellis::engageKeys();
 
