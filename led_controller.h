@@ -29,6 +29,7 @@ namespace LedController
 	unsigned long last_update = 0; // saves the last last update with millis()
 	bool off = false;			   // true when turned off
 	bool displayState = false;	   // true if display on, false if display off
+	bool rotaryState = false;	   // true if rotary led are on, false if leds are off
 
 	//* functions
 	/** @brief resets the timer, turning the leds back on and (if necessary) turing back on
@@ -58,42 +59,38 @@ namespace LedController
 		{
 			luminance = 0;
 			off = true;
-			displayState = false;
 		}
 		// disabling / turning off
 		else if (time >= AWAKE_TIME + DIMMING_TIME + STANDBY_TIME)
 		{
 			luminance = map(time - (AWAKE_TIME + DIMMING_TIME + STANDBY_TIME), 0, DISABLING_TIME, STANDBY_POWER, 0);
 			off = false;
-			displayState = false;
 		}
 		// standby / leds dimmed & display off
 		else if (time >= AWAKE_TIME + DIMMING_TIME)
 		{
 			luminance = STANDBY_POWER;
 			off = false;
-			displayState = false;
 		}
 		// first dimming phase
 		else if (time >= AWAKE_TIME)
 		{
 			luminance = map(time - AWAKE_TIME, 0, DIMMING_TIME, FULL_POWER, STANDBY_POWER);
 			off = false;
-			displayState = true;
 		}
 		// awake phase
 		else
 		{
 			luminance = FULL_POWER;
 			off = false;
-			displayState = true;
 		}
 
 		return (luminance);
 	}
 
-	/**	@brief calculates the luminance of the leds for the rotary encoders based on the time since the last action
+	/**	@brief calculates the luminance of the leds for the rotary encoders based on the time since the last action. also updates the display state
 	 * @return the luminance as a percentage between 0 (off) and 100 (full power)
+	 * 
 	 */
 	float updateForRotaryEncoder()
 	{
@@ -109,6 +106,7 @@ namespace LedController
 			luminance = 0;
 			off = true;
 			displayState = false;
+			rotaryState = false;
 		}
 		// disabling / turning off
 		else if (time >= AWAKE_TIME + DIMMING_TIME + STANDBY_TIME)
@@ -116,6 +114,7 @@ namespace LedController
 			luminance = map(time - (AWAKE_TIME + DIMMING_TIME + STANDBY_TIME), 0, DISABLING_TIME, STANDBY_POWER_ROT, 0);
 			off = false;
 			displayState = false;
+			rotaryState = true;
 		}
 		// standby / leds dimmed & display off
 		else if (time >= AWAKE_TIME + DIMMING_TIME)
@@ -123,6 +122,7 @@ namespace LedController
 			luminance = STANDBY_POWER_ROT;
 			off = false;
 			displayState = false;
+			rotaryState = true;
 		}
 		// first dimming phase
 		else if (time >= AWAKE_TIME)
@@ -130,6 +130,7 @@ namespace LedController
 			luminance = map(time - AWAKE_TIME, 0, DIMMING_TIME, FULL_POWER_ROT, STANDBY_POWER_ROT);
 			off = false;
 			displayState = true;
+			rotaryState = true;
 		}
 		// awake phase
 		else
@@ -137,12 +138,21 @@ namespace LedController
 			luminance = FULL_POWER_ROT;
 			off = false;
 			displayState = true;
+			rotaryState = true;
 		}
 
 		return (luminance);
 	}
 
-	/** @brief decides, if the display should be on or off
+	/** @brief returns wether the rotary encoder leds should be on or off
+	 * @return true for led on; false for led off
+	 */
+	bool getRotaryState()
+	{
+		return (rotaryState);
+	}
+
+	/** @brief returns wether the display should be on or off
 	 * @return true for display on; false for display off
 	 */
 	bool getDisplayState()
