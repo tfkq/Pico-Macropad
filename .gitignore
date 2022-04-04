@@ -1,3 +1,4 @@
 /doc/media/*
 /.vscode/*
 Pico-Macropad.code-workspace
+.pio/*
