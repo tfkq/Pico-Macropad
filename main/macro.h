@@ -1,19 +1,34 @@
+/**
+ * @file macro.h
+ * @author zauberwild
+ * @brief easy API to send some macros and key presses to the computer. kinda overpowered for my purpose though
+ * @version 1.0
+ * @date 2022-04-04
+ * 
+ * @copyright MIT license, Arvid Randow, 2022
+ * 
+ */
+
+
+
+
+
 /** SHORTCUT
- * 
+ *
  * this file executes the shortcuts
- * 
- * it is, now that i am using AutoHotKey, completely over-engineered, but it can almost any shortcut you'd want
- * 
+ *
+ * it is, now that i am using AutoHotKey, completely over-engineered, but it can do almost any shortcut you'd want
+ *
  * created by zauberwild on 16.08.2021
- * 
+ * licensed under MIT license
  */
 
 #ifndef shortcut_h
 #define shortcut_h
 #include "Arduino.h"
-#include <Keyboard.h>
 
-namespace ShortcutKeyboard
+
+namespace Macro
 {
 
 	/** @brief starts the keyboard
@@ -22,13 +37,13 @@ namespace ShortcutKeyboard
 	{
 
 		Keyboard.begin();
-		Serial.println("[ShortcutKeyboard::ShortcutKeyboard] Shortcut-Keebs ready");
+		Serial.println("[Macro::Macro] Shortcut-Keebs ready");
 	}
 
 	/** @brief presses a key (including special ones) and releases all keys after 10ms
 	 * @param key the special to press (i.e. KEY_F11). This goes after the syntax of Keyboard library
 	 * (these keywords: https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/)
-	*/
+	 */
 	void press(int key)
 	{
 
@@ -38,7 +53,7 @@ namespace ShortcutKeyboard
 
 		Keyboard.releaseAll();
 
-		//Serial.print("[ShortcutKeyboard::press] just pressed: "); Serial.println(key);
+		// Serial.print("[Macro::press] just pressed: "); Serial.println(key);
 	}
 
 	/** @brief sends the text with commands to the computer
@@ -62,11 +77,11 @@ namespace ShortcutKeyboard
 			// break when the array is empty
 			if (text[i] == 0)
 			{
-				// Serial.println("[ShortcutKeyboard::print] array empty, breaking loop");
+				// Serial.println("[Macro::print] array empty, breaking loop");
 				break;
 			}
 
-			//catch special keys
+			// catch special keys
 			if (text[i] == '$')
 			{
 				i++; // advance head
