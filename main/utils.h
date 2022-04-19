@@ -4,10 +4,13 @@
  * @brief helping functions and structs
  * @version 0.1
  * @date 2022-04-04
- * 
+ *
  * @copyright MIT license, Arvid Randow, 2022
- * 
+ *
  */
+
+#ifndef utils_h
+#define utils_h
 
 //* TYPE DEFINITIONS
 /**
@@ -16,6 +19,13 @@
  */
 struct RGB
 {
+    RGB() {}
+    RGB(int p_r, int p_g, int p_b)
+    {
+        r = p_r;
+        g = p_g;
+        b = p_b;
+    }
     float r;
     float g;
     float b;
@@ -27,83 +37,67 @@ struct RGB
  */
 struct LEDStates
 {
-    bool off;
-    bool flash;
-    bool pulse;
+    bool on = true;
+    bool blink = false;
+    bool flash = false;
+    bool pulse = false;
 };
 
-/**
- * @brief stores all properties a button could have
- *
- */
-struct Button
-{
-    RGB color;
-    LEDStates state;
-    char name[MAX_NAME_LENGTH + 1];
-    bool use_macro = true; // saves whether the macros or the functions should be used
-    char macro[MAX_MACRO_LENGTH + 1];
-    void (*press)();
-};
-
-/**
- * @brief stores the layouts of the macro buttons for Action namespace
- *
- */
-struct Layout
-{
-    bool used = false;
-    RGB color;
-    LEDStates state;
-    char name[MAX_NAME_LENGTH + 1];
-    Button buttons[12];
-};
-
-/**
- * @brief stores the state of all leds, so that Action::event can give back the led states to the neotrellis module
- *
- */
-struct LEDMap
-{
-    RGB colors[16];
-    LEDStates states[16];
-};
+// /**
+//  * @brief stores the layouts of the macro buttons for Action namespace
+//  *
+//  */
+// struct Layout
+// {
+//     bool used = false;
+//     RGB color;
+//     LEDStates state;
+//     char name[MAX_NAME_LENGTH + 1];
+//     Button buttons[12];
+// };
 
 //* HELPER FUNCTIONS
 
-/**
- * @brief Get a clean layout object.
- * this function makes sure that all properties (espacially the char[]) are set to null
- *
- * @return cleaned Layout
- */
-Layout get_clean_layout()
-{
-    Layout l;
-    for (int i = 0; i < MAX_NAME_LENGTH + 1; i++)
-        l.name[i] = 0;
+// /**
+//  * @brief Get a clean layout object.
+//  * this function makes sure that all properties (espacially the char[]) are set to null
+//  *
+//  * @return cleaned Layout
+//  */
+// Layout get_clean_layout()
+// {
+//     Layout l;
+//     for (int i = 0; i < MAX_NAME_LENGTH + 1; i++)
+//         l.name[i] = 0;
 
-    l.color.r = 0;
-    l.color.g = 0;
-    l.color.b = 0;
+//     l.color.r = 0;
+//     l.color.g = 0;
+//     l.color.b = 0;
 
-    for (int i = 0; i < 12; i++)
-    {
-        for (int j = 0; j < MAX_NAME_LENGTH + 1; j++)
-            l.buttons[i].name[j] = 0;
+//     for (int i = 0; i < 12; i++)
+//     {
+//         for (int j = 0; j < MAX_NAME_LENGTH + 1; j++)
+//             l.buttons[i].name[j] = 0;
 
-        for (int j = 0; j < MAX_MACRO_LENGTH + 1; j++)
-        {
-            l.buttons[i].macro[j] = 0;
-        }
-    }
+//         for (int j = 0; j < MAX_MACRO_LENGTH + 1; j++)
+//         {
+//             l.buttons[i].macro[j] = 0;
+//         }
+//     }
 
-    return l;
-}
+//     return l;
+// }
 
 /** hue to rgb
  * @brief converts hsl to rgb, but only takes the h. s and l are assumed to be 100%
- * @param hue the hue of the color [0; 360] inclusive
+ * @param hue the hue of the color [0; 360]
+ */
+
+/**
+ * @brief convert a hue to an rgb value. saturation and value are assumed to be 100%
+ * 
+ * @param hue the hue fo the color (0..360)
+ * @return RGB rgb value
  */
 RGB hue_to_rgb(float hue)
 {
@@ -172,3 +166,5 @@ RGB hue_to_rgb(float hue)
 
     return out;
 }
+
+#endif

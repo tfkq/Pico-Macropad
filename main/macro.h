@@ -40,7 +40,9 @@ namespace Macro
 		Serial.println("[Macro::Macro] Shortcut-Keebs ready");
 	}
 
-	/** @brief presses a key (including special ones) and releases all keys after 10ms
+	/**
+	 * @brief presses a key (including special ones) and releases all keys after 10ms
+	 * 
 	 * @param key the special to press (i.e. KEY_F11). This goes after the syntax of Keyboard library
 	 * (these keywords: https://www.arduino.cc/reference/en/language/functions/usb/keyboard/keyboardmodifiers/)
 	 */
@@ -56,8 +58,12 @@ namespace Macro
 		// Serial.print("[Macro::press] just pressed: "); Serial.println(key);
 	}
 
-	/** @brief sends the text with commands to the computer
+
+	/**
+	 * @brief sends the text with commands to the computer
+	 * 
 	 * @param text The key/text combination to be pressed
+	 * see "\doc\code documentation\Shortcut Command System & Language.md"
 	 */
 	void print(char text[64])
 	{

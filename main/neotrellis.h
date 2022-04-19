@@ -1,70 +1,71 @@
 /**
  * @file neotrellis.h
  * @author zauberwild
- * @brief (kinda) low level communication with the NeoTrellis board. make me the perfect API i need for the Button state
- * machines
+ * @brief (kinda) low level communication with the NeoTrellis board. makes me the perfect API i need for the Button state
+ * machines. updates can be written continuously, it will automatically only update every few seconds
  * @version 2.1
  * @date 2022-04-04
- * 
+ *
  * @copyright MIT license, Arvid Randow, 2022
- * 
+ *
  */
-
-
-/*
-/** NEOTRELLIS
- *
- * this file drives the NeoTrellis board
- *
- * created by zauberwild on 16.08.2021
- * licensed under MIT license
- *
 
 #ifndef neotrellis_h
 #define neotrellis_h
 
-//* DEFINING CONSTANTS
+#include "utils.h"
+
+//* CONSTANTS // SETTINGS
 #define INT_PIN 6
 
 namespace NeoTrellis
 {
-
-	//* VARIABLES AND OBJECTS
+	//* variables and objects
 	Adafruit_NeoTrellis trellis;
-	LED leds[16];
 
-	// event variables
-	volatile bool event_happened = false;
-	volatile int event_edge;
-	volatile int event_num;
+	// button / input
+	volatile bool event_happened;
+	// volatile int event_edge;
+	// volatile int event_num;
 
-	//* FUNCTIONS
+	volatile uint8_t events[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+	// led / output
+	unsigned long last_update; // stores the millis of the last led update
+	RGB colors[16];			   // saves all colors until the next update
+
+	// functions
 	TrellisCallback callback(keyEvent evt);
+
 	void begin();
 	void update();
+	void set_color(int num, RGB color);
+	int get_event(int number);
 
 }
 
 /**
- * @brief callback function. will be called when there's interrupt coming from the trellis.
- * don't call this function on your own!
+ * @brief callback function to handle input from the neotrellis
  *
- * @param evt the event raised by the interrupt
- * @return TrellisCallback 0, if it doesn't you are fucked
- *
+ * @param evt event raised by neotrellis
+ * @return TrellisCallback 0
+ */
 TrellisCallback NeoTrellis::callback(keyEvent evt)
 {
 	event_happened = true;
-	event_edge = evt.bit.EDGE;
-	event_num = evt.bit.NUM;
+	// event_edge = evt.bit.EDGE;
+	// event_num = evt.bit.NUM;
+	events[evt.bit.NUM] = evt.bit.EDGE;
+
+	Display::announce_change();
 
 	return 0;
 }
 
 /**
- * @brief start method for the neotrellis; call once in setup()
+ * @brief starts the neotrellis. configures the keys.
  *
- *
+ */
 void NeoTrellis::begin()
 {
 	// set pin-mode
@@ -83,74 +84,70 @@ void NeoTrellis::begin()
 		trellis.activateKey(i, SEESAW_KEYPAD_EDGE_RISING);
 		trellis.activateKey(i, SEESAW_KEYPAD_EDGE_FALLING);
 		trellis.registerCallback(i, callback);
-
-		leds[i] = LED(i, &trellis);
-		leds[i].begin();
-
-		RGB col = hue_to_rgb(map(i, 0, 16, 0, 360));
-		leds[i].set_color(col);
 	}
-	trellis.pixels.setBrightness(50);
+	trellis.pixels.setBrightness(255);
 	trellis.pixels.show();
 
-	Serial.println("[neotrellis::begin] Trellis board ready");
+	Serial.println("[NeoTrellis::begin] Trellis board ready");
 }
 
 /**
- * @brief updates the NeoTrellis; call repeatedly in loop()
+ * @brief checks for input, writes to the led
  *
- *
+ */
 void NeoTrellis::update()
 {
-	bool change_from_action = false; // stores any led change produced in Action namespace
-	//* input
-	// check for updates
-	if (!digitalRead(INT_PIN)) // this thing is necessary apparently, despite using the interrupt
+	if (!digitalRead(INT_PIN))
 	{
 		trellis.read(false);
 	}
-	// event detection
+
+	//* update buttons
 	if (event_happened)
 	{
 		event_happened = false;
-
-		if (event_edge == SEESAW_KEYPAD_EDGE_RISING)
-		{
-			leds[event_num].set_pulse(true);
-			change_from_action = Action::event(event_num);
-		}
-		else if (event_edge == SEESAW_KEYPAD_EDGE_FALLING)
-		{
-			leds[event_num].set_pulse(false);
-		}
+		last_input = millis();
 	}
 
-	//* leds
-	bool changed = false;
-	// change from the Action namespace
-	if (change_from_action)
+	//* update leds
+	if (last_update + TRELLIS_LED_UPDATE_TIME < millis())
 	{
-		changed = true;
-		LEDMap map = Action::get_led_map();
-		// update all leds
-		for(int i = 0; i < 16; i++)
-		{
-			leds[i].set_color(map.colors[i]);
-			leds[i].set_state(map.states[i]);
-		}
-	}
-	else
-	{
-		// change from inside this namespace
+		last_update = millis();
+
 		for (int i = 0; i < 16; i++)
 		{
-			if (leds[i].update())
-				changed = true;
+
+			uint32_t color_i = trellis.pixels.Color(colors[i].r * brightness / 100,
+													colors[i].g * brightness / 100,
+													colors[i].b * brightness / 100);
+			trellis.pixels.setPixelColor(i, color_i);
 		}
-	}
-	if (changed)
 		trellis.pixels.show();
+	}
+}
+
+/**
+ * @brief set a specific button to a specific color
+ *
+ * @param num number of button
+ * @param p_color color
+ */
+void NeoTrellis::set_color(int num, RGB p_color)
+{
+	colors[num] = p_color;
+}
+
+/**
+ * @brief checks if there was an event for a specific button
+ *
+ * @param number number of the button
+ * @return int the event or 0, if no event
+ */
+int NeoTrellis::get_event(int number)
+{
+	uint8_t ret = events[number];
+	events[number] = 0;
+	return ret;
 }
 
 #endif
-*/

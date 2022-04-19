@@ -1,0 +1,599 @@
+{
+	"apps": [
+		{
+			"name": "MAIN",
+			"buttons": [
+				{
+					"name": "MIC",
+					"color": 5,
+					"ahk_script": ";-- place your script here (and remove me) --\r\nSoundSet, +1, MASTER, mute, 8\r\nSoundSet, +1, MASTER, mute, 9"
+				},
+				{
+					"name": "Lock",
+					"color": 3,
+					"ahk_script": ";-- place your script here (and remove me) --\r\nDllCall(\"user32.dll\\LockWorkStation\")"
+				},
+				{
+					"name": "StBy",
+					"color": 2,
+					"ahk_script": ";standby\r\nRun, psshutdown -d -t 0"
+				},
+				{
+					"name": "Off",
+					"color": 1,
+					"ahk_script": ";shutdown\r\nMsgBox, 4,, Do you really want to shutdown?\r\nIfMsgBox Yes\r\n    Run, Shutdown.exe -s -t 00"
+				},
+				{
+					"name": "Min",
+					"color": 14,
+					"ahk_script": ";minimize the current window\r\nWinMinimize, A"
+				},
+				{
+					"name": "Max",
+					"color": 14,
+					"ahk_script": ";toggle between restored and maximize\r\n\r\nWinGet, max, MinMax, A\r\nif(max == 1){\r\n\tWinRestore, A\r\n}\r\nelse{\r\n\tWinMaximize, A\r\n}"
+				},
+				{
+					"name": "Prev",
+					"color": 4,
+					"ahk_script": "; plays previous song\r\nSend {Media_Prev}"
+				},
+				{
+					"name": "Next",
+					"color": 4,
+					"ahk_script": ";plays next song\r\nSend {Media_Next}"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "Win1",
+					"color": 17,
+					"ahk_script": ";-- place your script here (and remove me) --\r\nSend, #1"
+				},
+				{
+					"name": "Win2",
+					"color": 17,
+					"ahk_script": ";-- place your script here (and remove me) --\r\nSend, #2"
+				},
+				{
+					"name": "Win3",
+					"color": 17,
+					"ahk_script": ";-- place your script here (and remove me) --\r\nSend, #3"
+				},
+				{
+					"name": "Win4",
+					"color": 17,
+					"ahk_script": ";-- place your script here (and remove me) --\r\nSend, #4"
+				}
+			]
+		},
+		{
+			"name": "QuickStart",
+			"buttons": [
+				{
+					"name": "AbiV",
+					"color": 19,
+					"ahk_script": "; open the abitur vault\r\nRun, \"D:\\Documents\\Programme\\Pico-Macropad-AHK\\Abitur - Vault.URL\"\r\n\r\n\r\n"
+				},
+				{
+					"name": "HA_V",
+					"color": 19,
+					"ahk_script": "; open hausaufgaben vault\r\nRun, \"D:\\Documents\\Programme\\Pico-Macropad-AHK\\Hausaufgaben - Vault.URL\"\r\n"
+				},
+				{
+					"name": "NB_V",
+					"color": 19,
+					"ahk_script": "; open the notebook vault\r\nRun, \"D:\\Documents\\Programme\\Pico-Macropad-AHK\\Notebook - Vault.URL\"\r\n"
+				},
+				{
+					"name": "Obdn",
+					"color": 19,
+					"ahk_script": "; run obsidian\r\nRun, C:\\Users\\arvid\\AppData\\Local\\Obsidian\\Obsidian.exe\r\n\r\n"
+				},
+				{
+					"name": "Typo",
+					"color": 12,
+					"ahk_script": ";will start typora\r\nRun, \"C:\\Program Files\\Typora\\Typora.exe\"\r\n"
+				},
+				{
+					"name": "Notn",
+					"color": 12,
+					"ahk_script": ";notion\r\n\r\nRun, \"C:\\Users\\arvid\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Notion.lnk\"\r\n\r\n"
+				},
+				{
+					"name": "Word",
+					"color": 17,
+					"ahk_script": ";run ms word\r\nRun, \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Word.lnk\"\r\n\r\n"
+				},
+				{
+					"name": "Excl",
+					"color": 9,
+					"ahk_script": ";run ms excel\r\nRun, \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk\"\r\n\r\n\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --\r\n\r\n\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --\r\n\r\n\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "Sblm",
+					"color": 3,
+					"ahk_script": ";run sublime text\r\nRun, \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Sublime Text.lnk\"\r\n"
+				},
+				{
+					"name": "VSCo",
+					"color": 15,
+					"ahk_script": "; run VS-Code\r\n\r\nRun, \"C:\\Users\\arvid\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\Visual Studio Code.lnk\""
+				},
+				{
+					"name": "Ardu",
+					"color": 12,
+					"ahk_script": ";run Arduino IDE\r\nRun, \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Arduino.lnk\""
+				},
+				{
+					"name": "ViSt",
+					"color": 20,
+					"ahk_script": "; run Visual Studio 2019\r\nRun, \"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio 2019.lnk\""
+				}
+			]
+		},
+		{
+			"name": "Firefox",
+			"buttons": [
+				{
+					"name": "NTab",
+					"color": 7,
+					"ahk_script": ";New Tab\r\nSend, ^t\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "NWin",
+					"color": 8,
+					"ahk_script": ";open new window\r\nSend, ^n\r\n\r\n\r\n"
+				},
+				{
+					"name": "CTab",
+					"color": 3,
+					"ahk_script": ";close current tab\r\nSend, ^w\r\n\r\n"
+				},
+				{
+					"name": "CWin",
+					"color": 1,
+					"ahk_script": ";close current window\r\nSend, ^+w\r\n\r\n"
+				},
+				{
+					"name": "Srch",
+					"color": 23,
+					"ahk_script": ";focus on the adress bar\r\nSend, ^l\r\n\r\n"
+				},
+				{
+					"name": "Wiki",
+					"color": 23,
+					"ahk_script": ";start a wikipedia search\r\nSend, ^l\r\nSend, @wikipedia{Space}\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "Leo",
+					"color": 23,
+					"ahk_script": ";opens leo.org in current tab\r\nSend, ^l\r\nSleep, 500\r\nSend, leo.org\r\nSend, {Enter}\r\n\r\n\r\n"
+				},
+				{
+					"name": "SrPg",
+					"color": 23,
+					"ahk_script": ";search in page\r\nSend, ^f\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "Mute",
+					"color": 4,
+					"ahk_script": ";mute / unmute the tab\r\nSend, ^m\r\n\r\n"
+				},
+				{
+					"name": "Z0",
+					"color": 14,
+					"ahk_script": ";reset zoom\r\nSend, ^0\r\n\r\n"
+				},
+				{
+					"name": "Z-",
+					"color": 14,
+					"ahk_script": ";zoom out\r\nSend, ^-\r\n\r\n"
+				},
+				{
+					"name": "Z+",
+					"color": 14,
+					"ahk_script": ";zoom in\r\nSend, ^{+}\r\n\r\n\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "Home",
+					"color": 16,
+					"ahk_script": ";sends you back to your homepage\r\nSend, !{Home}\r\n\r\n"
+				},
+				{
+					"name": "Refr",
+					"color": 16,
+					"ahk_script": ";reload website\r\nSend, {F5}\r\n"
+				},
+				{
+					"name": "<T<",
+					"color": 17,
+					"ahk_script": ";previous tab\r\nSend, ^+{Tab}\r\n\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": ">T>",
+					"color": 17,
+					"ahk_script": ";goes to next tab\r\nSend, ^{Tab}\r\n\r\n\r\n\r\n"
+				}
+			]
+		},
+		{
+			"name": "VS-Code",
+			"buttons": [
+				{
+					"name": "File",
+					"color": 21,
+					"ahk_script": "; reveal active file in side bar\r\nSend, ^+!f\r\n"
+				},
+				{
+					"name": "NFil",
+					"color": 10,
+					"ahk_script": "; create a new file\r\nSend, ^!n\r\n"
+				},
+				{
+					"name": "NFol",
+					"color": 10,
+					"ahk_script": ";create a new folder\r\nSend, ^!f\r\n"
+				},
+				{
+					"name": "RNam",
+					"color": 5,
+					"ahk_script": ";rename symbol\r\nSend, {F2}\r\n"
+				},
+				{
+					"name": "Up",
+					"color": 21,
+					"ahk_script": "; Previous Side Bar View / go up\r\nSend, ^+!.\r\n\r\n\r\n"
+				},
+				{
+					"name": "oFil",
+					"color": 12,
+					"ahk_script": "; open command palette to file select\r\nSend, ^p\r\n\r\n"
+				},
+				{
+					"name": "Cmd",
+					"color": 13,
+					"ahk_script": ";open command palette\r\nSend, ^P\r\n\r\n\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "SdBr",
+					"color": 21,
+					"ahk_script": "; Toggle Side Bar Visibility\r\nSend, ^b"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "Down",
+					"color": 21,
+					"ahk_script": "; next side bar view / down\r\nSend, ^+!,"
+				},
+				{
+					"name": "Term",
+					"color": 19,
+					"ahk_script": "; view: show terminal\r\nSend, ^\u00f6\r\n\r\n"
+				},
+				{
+					"name": "<T<",
+					"color": 17,
+					"ahk_script": "; previous tab\r\nSend, ^+{Home}\r\n\r\n"
+				},
+				{
+					"name": ">T>",
+					"color": 17,
+					"ahk_script": "; show next tab\r\nSend ^+{End}\r\n"
+				}
+			]
+		},
+		{
+			"name": "Obsidian",
+			"buttons": [
+				{
+					"name": "Expl",
+					"color": 20,
+					"ahk_script": ";Dateiexplorer zeigen\r\nSend, ^1\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "OFil",
+					"color": 8,
+					"ahk_script": ";open file\r\nSend, ^o"
+				},
+				{
+					"name": "Cmd",
+					"color": 11,
+					"ahk_script": ";open command palette\r\nSend, ^p\r\n\r\n"
+				},
+				{
+					"name": "Tags",
+					"color": 14,
+					"ahk_script": ";Tag-Bereich zeigen\r\nSend, ^2\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "Srch",
+					"color": 20,
+					"ahk_script": ";search in all files\r\nSend, ^+F\r\n\r\n\r\n"
+				},
+				{
+					"name": "Mode",
+					"color": 17,
+					"ahk_script": ";toggle mode\r\nSend, ^e\r\n\r\n"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "Outl",
+					"color": 14,
+					"ahk_script": ";Gliederungsbereich zeigen\r\nSend, ^3\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "Grph",
+					"color": 19,
+					"ahk_script": ";show graph view\r\nSend, ^g\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "Corr",
+					"color": 4,
+					"ahk_script": ";correct on \r\nSend, ^.\r\n\r\n\r\n"
+				},
+				{
+					"name": "Corr",
+					"color": 5,
+					"ahk_script": ";correction off\r\nSend, ^+.\r\n\r\n"
+				},
+				{
+					"name": "Tabl",
+					"color": 15,
+					"ahk_script": ";show table tools\r\nSend, ^+d\r\n"
+				},
+				{
+					"name": "PDF",
+					"color": 19,
+					"ahk_script": ";export to pdf\r\nSend, ^+p\r\n\r\n\r\n"
+				},
+				{
+					"name": "LPan",
+					"color": 18,
+					"ahk_script": ";show/hide left panel\r\nSend, ^b\r\n\r\n\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "RPan",
+					"color": 16,
+					"ahk_script": ";show/hide right panel\r\nSend, ^+b\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+				},
+				{
+					"name": "DayN",
+					"color": 15,
+					"ahk_script": ";open daily note\r\nSend, ^!d\r\n\r\n"
+				}
+			]
+		},
+		{
+			"name": "Fusion 360",
+			"buttons": [
+				{
+					"name": "Skiz",
+					"color": 8,
+					"ahk_script": "; neue Skizze\r\nSend, k\r\n\r\n\r\n"
+				},
+				{
+					"name": "Extr",
+					"color": 6,
+					"ahk_script": "; extrusion\r\nSend, e\r\n\r\n"
+				},
+				{
+					"name": "Dreh",
+					"color": 6,
+					"ahk_script": "; Drehen\r\nSend, ^d\r\n"
+				},
+				{
+					"name": "Erhe",
+					"color": 6,
+					"ahk_script": ";erhebung\r\nSend, ^e\r\n\r\n"
+				},
+				{
+					"name": "Line",
+					"color": 14,
+					"ahk_script": ";Skizze / Linie"
+				},
+				{
+					"name": "Circ",
+					"color": 14,
+					"ahk_script": "; Skizze  / Kreis\r\nSend, c\r\n"
+				},
+				{
+					"name": "Rect",
+					"color": 14,
+					"ahk_script": "; Skizze / Rechteck\r\nSend, r"
+				},
+				{
+					"name": "Bow",
+					"color": 14,
+					"ahk_script": "; Skizze / Bogen durch drei Punkte\r\nSend, b\r\n"
+				},
+				{
+					"name": "Abru",
+					"color": 4,
+					"ahk_script": "; abrunden\r\nSend, f"
+				},
+				{
+					"name": "Fase",
+					"color": 4,
+					"ahk_script": "; fase\r\nSend, F\r\n\r\n"
+				},
+				{
+					"name": "Move",
+					"color": 4,
+					"ahk_script": "; bewegen\r\nSend, m"
+				},
+				{
+					"name": "VAR",
+					"color": 5,
+					"ahk_script": "; parameter\r\nSend, ^p\r\n\r\n"
+				},
+				{
+					"name": "Mess",
+					"color": 21,
+					"ahk_script": "; messen\r\nSend, i\r\n"
+				},
+				{
+					"name": "Eben",
+					"color": 9,
+					"ahk_script": "; ebene\r\nSend, u\r\n\r\n"
+				},
+				{
+					"name": "Open",
+					"color": 12,
+					"ahk_script": ";datei \u00f6ffnen\r\nSend, ^o\r\n\r\n"
+				},
+				{
+					"name": "Save",
+					"color": 12,
+					"ahk_script": "; speichern\r\nSend, ^s"
+				}
+			]
+		},
+		{
+			"name": "Aseprite",
+			"buttons": [
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				},
+				{
+					"name": "",
+					"color": 0,
+					"ahk_script": ";-- place your script here (and remove me) --"
+				}
+			]
+		}
+	]
+}

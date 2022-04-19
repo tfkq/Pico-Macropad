@@ -4,46 +4,17 @@
  * @brief high level management of the volume knob
  * @version 2.1
  * @date 2022-04-04
- * 
+ *
  * @copyright MIT license, Arvid Randow, 2022
- * 
+ *
  */
-
-
-/*
 
 #ifndef volume_knob_h
 #define volume_knob_h
 
-// only here to keep my linter happy ￣へ￣
-// #include <Bounce2.h>
-//TODO remove if i really dont need it
-
-//* SETTINGS
-#define DEBOUNCE_TIME 5
-
 namespace VolumeKnob
 {
-
-	//* DEFINING VARIABLES
-	// pins
-	int a = 27;
-	int b = 26;
-	int sw = 17;
-	int led_r = 18;
-	int led_g = 19;
-	int led_b = 20;
-	// bouncing objects
-	Bounce bounce_a = Bounce(); // Bounce for all inputs (makes the debouncing a lot easier)
-	Bounce bounce_b = Bounce();
-	Bounce bounce_sw = Bounce();
-	// led object (will fade between hue 0 to 120, middle position 60)
-	LED led = LED(led_r, led_g, led_b);
-
-	// values
-	bool pulse = false; // saves the button press, to make the led white
-
-	const int STEPS_PER_VOLUME = 1; // how many steps you need to turn the knob for one command send
+	RotaryEncoder encoder = RotaryEncoder(27, 26, 17, RGB(18, 19, 20));
 
 	int counter_volume; // keeps track of how far the encoder has been turned
 	int counter_led;
@@ -51,57 +22,45 @@ namespace VolumeKnob
 	unsigned long last_change; // saves the last update, to reset the led on time
 	int reset_timer = 2500;	   // [ms] after what time shall the light be resetted?
 
-	//* METHODS
-
 	void begin();
 	void update();
 
 }
 
-/** @brief start of the volume knob
- *
+/**
+ * @brief start the volume knob; call once in setup
+ * 
+ */
 void VolumeKnob::begin()
 {
-	// set the inputs
-	bounce_a.attach(a, INPUT_PULLUP);
-	bounce_a.interval(DEBOUNCE_TIME);
-	bounce_b.attach(b, INPUT_PULLUP);
-	bounce_b.interval(DEBOUNCE_TIME);
-	bounce_sw.attach(sw, INPUT);
-	bounce_sw.interval(DEBOUNCE_TIME);
-
-	// set the led
-	led.begin();
-	led.set_color(60);
-
-	Serial.println("[VolumeKnob::begin] Volume Knob is spinning!");
+	encoder.begin();
+	encoder.set_color(60);
 }
 
-/** @brief gets the input from the right rotary encoder and spits out volume control
- *
+/**
+ * @brief updates the input and led of the volume knob; call repeatedly without delay
+ * 
+ */
 void VolumeKnob::update()
 {
-	//* rotating fun
-	bounce_a.update();
-	bounce_b.update();
-	if (bounce_a.changed() && bounce_a.read() == LOW)
+	encoder.update();
+
+	//* get rotating events
+	int event = encoder.get_rot_event();
+	if (event == ROTARY_ENCODER_CW)
 	{
-
+		counter_volume++;
+		counter_led++;
 		last_change = millis();
-
-		if (bounce_b.read() == HIGH)
-		{
-			counter_volume++;
-			counter_led++;
-		}
-		else
-		{
-			counter_volume--;
-			counter_led--;
-		}
+	}
+	else if (event == ROTARY_ENCODER_CCW)
+	{
+		counter_volume--;
+		counter_led--;
+		last_change = millis();
 	}
 
-	//* sends commands according to the rotating fun
+	// send commands
 	if (counter_volume == STEPS_PER_VOLUME)
 	{
 		// volume up
@@ -114,19 +73,14 @@ void VolumeKnob::update()
 		counter_volume = 0;
 	}
 
-	//* clicking fun
-	bounce_sw.update();
-
-	if (bounce_sw.changed())
+	//* get clicking events
+	event = encoder.get_sw_event();
+	if (event == ROTARY_ENCODER_SW_RISING)
 	{
-		pulse = bounce_sw.read();
-		if (bounce_sw.read() == HIGH)
-		{
-			Macro::press(KEY_F20);
-		}
+		Macro::press(KEY_F20);
 	}
 
-	//* led-disco
+	//* led management
 	// check for time
 	if (millis() - reset_timer >= last_change)
 	{
@@ -142,11 +96,7 @@ void VolumeKnob::update()
 	if (hue > 120)
 		hue = 120;
 
-	led.set_color(hue);
-	// overwrite if pressed
-	led.set_pulse(pulse);
-	led.update();
+	encoder.set_color(hue);
 }
 
 #endif
-*/

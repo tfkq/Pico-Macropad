@@ -4,216 +4,178 @@
  * @brief class the controls a button of the Neotrellis. complete with input and led controlling (incl. state machine)
  * @version 2.1
  * @date 2022-04-04
- * 
+ *
  * @copyright MIT license, Arvid Randow, 2022
- * 
+ *
  */
 
+#ifndef button_state_machine_h
+#define button_state_machine_h
 
-
-
-/*
-class LED
+class TrellisButton
 {
-private:
-	bool trellis_led;
-	int pin_r, pin_g, pin_b;
-	int led_number = 0;
-	Adafruit_NeoTrellis *trellis;
-	RGB value;
-	RGB prev_buffer;
+	int trellis_number;
 
-	// states
+	RGB color;
 	LEDStates state;
 
+	bool changed = false;
+
+	uint8_t event;
+
 public:
-	LED();
-	LED(int p_number, Adafruit_NeoTrellis *trellis_p); // constructor for neotrellis LED
-	LED(int p_r, int p_g, int p_b);					   // constructor for Encoder LED
+	TrellisButton();
+	TrellisButton(int p_trellis_number);
 
 	void begin();
+	void update();
 
-	// color
-	void set_color(float p_hue);
-	void set_color(RGB p_value);
+	int get_event();
 
-	// states
+	void set_color(RGB p_color);
+	void set_color(int hue);
 	void set_state(LEDStates p_state);
 	void set_on_off(bool on);
-	void set_flash(bool flash);
-	void set_pulse(bool pulse);
-
-	bool update();
+	void set_flash(bool on);
+	void set_blink(bool on);
 };
 
 /**
- * @brief Construct a new LED::LED object.
- * I don't know why I need it, but I need it ¯\_(ツ)_/¯
+ * @brief Construct a new Trellis Button:: Trellis Button object
  *
-LED::LED()
+ */
+TrellisButton::TrellisButton()
 {
 }
 
 /**
- * @brief Construct a new LED::LED object
+ * @brief Construct a new Trellis Button:: Trellis Button object
  *
- * @param p_number number of the button
- * @param trellis_p pointer to the trellis object in control of the led
- *
-LED::LED(int p_number, Adafruit_NeoTrellis *trellis_p)
+ * @param p_trellis_number number of the button on the trellis; 0..15
+ */
+TrellisButton::TrellisButton(int p_trellis_number)
 {
-	trellis_led = true;
-	led_number = p_number;
-	trellis = trellis_p;
+	trellis_number = p_trellis_number;
 }
 
 /**
- * @brief Construct a new LED::LED object
+ * @brief begins the macropad. needless for now
  *
- * @param p_r pin of red led
- * @param p_g pin of green led
- * @param p_b pin of blue led
- *
-LED::LED(int p_r, int p_g, int p_b)
+ */
+void TrellisButton::begin()
 {
-	trellis_led = false;
-	pin_r = p_r;
-	pin_g = p_g;
-	pin_b = p_b;
 }
 
 /**
- * @brief start the led object, mainly just sets the pinmode for the encoder leds
+ * @brief updates the button on input and led status. has to be called repetitively and without delay
  *
- *
-void LED::begin()
+ */
+void TrellisButton::update()
 {
-	if (trellis_led)
+	//* update button
+	if (state.on)
 	{
+		event = NeoTrellis::get_event(trellis_number);
 	}
 	else
 	{
-		pinMode(pin_r, OUTPUT);
-		pinMode(pin_g, OUTPUT);
-		pinMode(pin_b, OUTPUT);
+		event = 0;
 	}
-}
-
-/**
- * @brief set the color via the hue
- *
- * @param p_hue the hue [0;360]
- *
-void LED::set_color(float p_hue)
-{
-	value = hue_to_rgb(p_hue);
-}
-
-/**
- * @brief set the color via rgb values
- *
- * @param p_value input them as a rgb-struct
- *
-void LED::set_color(RGB p_value)
-{
-	value = p_value;
-}
-
-/**
- * @brief overwrite the complete state
- *
- * @param p_state
- *
-void LED::set_state(LEDStates p_state)
-{
-	state = p_state;
-}
-
-/**
- * @brief turn the led off and on
- * (this state has the highest priority)
- * @param on true for on; false for off
- *
-void LED::set_on_off(bool on)
-{
-	state.off = !on;
-}
-
-/**
- * @brief set the led to flashing
- * (this state has third priority)
- * @param flash true to turn it on; false to turn it off
- *
-void LED::set_flash(bool flash)
-{
-	state.flash = flash;
-}
-
-/**
- * @brief set the led to pulse (white flash)
- * (this state has second priority)
- * @param pulse true to turn it on; false to turn it off
- *
-void LED::set_pulse(bool pulse)
-{
-	state.pulse = pulse;
-}
-
-/**
- * @brief update the led
- *
- * @return true values have changed
- * @return false values did not change
- *
-bool LED::update()
-{
-	RGB buffer = value;
-
-	//* modifications
-
-	if (state.off)
+	if (event == SEESAW_KEYPAD_EDGE_RISING)
 	{
-		buffer.r = 0;
-		buffer.r = 0;
-		buffer.r = 0;
+		state.pulse = true;
 	}
-	else if (state.pulse)
+	else if (event == SEESAW_KEYPAD_EDGE_FALLING)
 	{
-		buffer.r = 255;
-		buffer.g = 255;
-		buffer.b = 255;
-	}
-	else if (state.flash)
-	{
-		// TODO make it go blinky blinky
+		state.pulse = false;
 	}
 
-	// check if something changed from the last time
-	bool changed = false;
-	if (buffer.r != prev_buffer.r ||
-		buffer.g != prev_buffer.g ||
-		buffer.b != prev_buffer.b)
-		changed = true;
-
-	//* write to the leds
-	if (changed)
+	//* update led
+	RGB actual_color = color;
+	// state machine
+	if (state.on == false) // led is off
 	{
-		if (trellis_led)
+		actual_color = RGB(0, 0, 0);
+	}
+	else if (state.pulse) // led is pressed
+	{
+		actual_color = RGB(255, 255, 255);
+	}
+	else if (state.flash) // make it flash
+	{
+		// einfach Kosinus verwenden
+		double mod = (cos(2 * PI * millis() / 2000)+1)*0.5;
+		actual_color.r *= mod;
+		actual_color.g *= mod;
+		actual_color.b *= mod;
+	}
+	else if (state.blink) // just a blink
+	{
+		// einfach Kosinus verwenden
+		double mod = cos(2 * PI * millis() / 1000);
+		if (mod > 0.99) // only for short periods of time
 		{
-			trellis->pixels.setPixelColor(led_number,
-										  trellis->pixels.Color(
-											  buffer.r, buffer.g, buffer.b));
-		}
-		else
-		{
-			analogWrite(pin_r, 255 - buffer.r);
-			analogWrite(pin_g, 255 - buffer.g);
-			analogWrite(pin_b, 255 - buffer.b);
+			actual_color.r *= 0.65; // make the brightness a tiny little bit lower
+			actual_color.g *= 0.65;
+			actual_color.b *= 0.65;
 		}
 	}
 
-	prev_buffer = buffer;
-
-	return changed;
+	// writing
+	NeoTrellis::set_color(trellis_number, actual_color);
 }
-*/
+
+/**
+ * @brief get an event
+ * 
+ * @return int SEESAW_KEYPAD_EDGE_RISING or SEESAW_KEYPAD_EDGE_FALLING
+ */
+int TrellisButton::get_event()
+{
+	return event;
+}
+
+
+
+/**
+ * @brief set the color of the led
+ *
+ * @param p_color color
+ */
+void TrellisButton::set_color(RGB p_color)
+{
+	color = p_color;
+}
+
+/**
+ * @brief turn button on or off. also effects button itself
+ *
+ * @param on
+ */
+void TrellisButton::set_on_off(bool on)
+{
+	state.on = on;
+}
+
+
+/**
+ * @brief turn on/off flash (fading on-off)
+ * 
+ * @param on 
+ */
+void TrellisButton::set_flash(bool on)
+{
+	state.flash = on;
+}
+
+/**
+ * @brief turn on/off blink (small, unobtrusive blink)
+ * 
+ * @param on 
+ */
+void TrellisButton::set_blink(bool on)
+{
+	state.blink = on;
+}
+
+#endif
