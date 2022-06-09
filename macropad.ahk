@@ -47,8 +47,9 @@ btn := % Variable2
 if (layer == 0){				; LAYER 0 - "MAIN"
 	if (btn == 0){					; button  0 - "Micro"
 	;toggle microphone mute
-SoundSet, +1, MASTER, mute, 8
-SoundSet, +1, MASTER, mute, 9
+;SoundSet, +1, MASTER, mute, 8
+;SoundSet, +1, MASTER, mute, 9
+SoundSet, +1, MASTER, mute, 10
 }
 if (btn == 1){					; button  1 - "Prev"
 	; spiel vorheriges lied
@@ -88,7 +89,7 @@ if (btn == 8){					; button  8 - "Firefx"
 Run, firefox.exe
 }
 if (btn == 9){					; button  9 - "[PROG]"
-	;reprogram macropad, isn't supposed to do ANYTHING in ahk-script
+	;reprogram macropad, isn't supposed to do anything in ahk-script
 }
 if (btn == 10){					; button  10 - "VsCode"
 	; starte VS Code
