@@ -109,6 +109,8 @@ void RotaryEncoder::update()
 		}
 	}
 
+	//NOTE Schriftart herunterladen
+
 	//* clicking fun
 	bounce_sw.update();
 	sw_event = 0;

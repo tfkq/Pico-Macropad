@@ -37,7 +37,7 @@ unsigned long last_input = 0; // saves the last time any of the inputs had been 
 
 void setup()
 {
-	Serial.begin(9600);
+	//Serial.begin(9600);
 	// while (!Serial)
 	// {
 	// }

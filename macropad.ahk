@@ -97,9 +97,7 @@ Run, Code.exe, C:\Users\arvid\AppData\Local\Programs\Microsoft VS Code
 }
 if (btn == 11){					; button  11 - "Obsdn"
 	; starte Obsidian
-Send !{Space}
-Sleep, 300
-Send Vault
+Run, "D:\GitHub\Obsidian-Manager\Vault-Starter\run.bat"
 }
 
 }
@@ -342,7 +340,7 @@ if (btn == 11){					; button  11 - ""
 
 }
 if (layer == 6){				; LAYER 6 - "Aseprite"
-	if (btn == 0){					; button  0 - ""
+	if (btn == 0){					; button  0 - "1"
 	
 }
 if (btn == 1){					; button  1 - ""
@@ -377,6 +375,45 @@ if (btn == 10){					; button  10 - ""
 }
 if (btn == 11){					; button  11 - ""
 	
+}
+
+}
+if (layer == 7){				; LAYER 7 - "Core Keeper"
+	if (btn == 0){					; button  0 - "i1"
+	Send, 1
+}
+if (btn == 1){					; button  1 - "i2"
+	Send, 2
+}
+if (btn == 2){					; button  2 - "i3"
+	Send, 3
+}
+if (btn == 3){					; button  3 - "i4"
+	Send, 4
+}
+if (btn == 4){					; button  4 - "i5"
+	Send, 5
+}
+if (btn == 5){					; button  5 - "i6"
+	Send, 6
+}
+if (btn == 6){					; button  6 - "Map"
+	
+}
+if (btn == 7){					; button  7 - "e8"
+	
+}
+if (btn == 8){					; button  8 - "e9"
+	
+}
+if (btn == 9){					; button  9 - "Drop"
+	Send, p
+}
+if (btn == 10){					; button  10 - "Move"
+	Send, q
+}
+if (btn == 11){					; button  11 - "Sort"
+	Send, r
 }
 
 }
